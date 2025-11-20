@@ -4,35 +4,30 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "tbl_session")
 public class Session {
-    private static final Long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
+    @Column(name = "session_title", length = 255, nullable = false)
     private String title;
+    @Column(name = "session_start_date", nullable = false)
     private LocalDate startDate;
+    @Column(name = "session_start_time", nullable = false)
     private LocalTime startTime;
 
     @ManyToOne
-    @JoinColumn(name = "conference_id")
+    @JoinColumn(name = "conf_id")
     private Conference conference;
 
-
-    public Session() {}
-
-    public Session(String title, LocalDate startDate, LocalTime startTime) {
-        this.title = title;
-        this.startDate = startDate;
-        this.startTime = startTime;
+    public Integer getId() {
+        return id;
     }
 
-    public Long getId() {
-        return id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -59,15 +54,12 @@ public class Session {
         this.startTime = startTime;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Session session = (Session) o;
-        return Objects.equals(id, session.id);
+    public Conference getConference() {
+        return conference;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
+    public void setConference(Conference conference) {
+        this.conference = conference;
     }
+
 }

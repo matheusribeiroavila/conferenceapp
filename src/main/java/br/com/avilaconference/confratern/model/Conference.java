@@ -7,32 +7,22 @@ import java.util.List;
 @Entity
 @Table(name = "tbl_conference")
 public class Conference {
-    private static final Long serializeVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "conf_id")
-    private long id;
-    @Column(name = "conf_name")
+    private Integer id;
+    @Column(name = "conf_name", length = 255, nullable = false)
     private String name;
-    @Column(name = "conf_adress")
-    private String adress;
+    @Column(name = "conf_address", length = 255, nullable = false)
+    private String address;
 
-    @OneToMany(mappedBy = "conference")
-    private List<Session> sessions;
-
-    public Conference() {}
-
-    public Conference(String name, String adress, List<Session> sessions) {
-        this.name = name;
-        this.adress = adress;
-        this.sessions = sessions;
-    }
-
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -42,19 +32,11 @@ public class Conference {
         this.name = name;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getaddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
-    public List<Session> getSessions() {
-        return sessions;
-    }
-
-    public void setSessions(List<Session> sessions) {
-        this.sessions = sessions;
+    public void setaddress(String address) {
+        this.address = address;
     }
 }

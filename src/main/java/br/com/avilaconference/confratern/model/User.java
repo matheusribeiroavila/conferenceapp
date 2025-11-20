@@ -1,39 +1,34 @@
 package br.com.avilaconference.confratern.model;
 
-
 import jakarta.persistence.*;
 
-import java.util.Objects;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_user")
 public class User {
-    private static final long serializeVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "user_id")
+    private Integer userId;
+    @Column(name = "user_name", length = 255, nullable = false)
     private String name;
+    @Column(name = "user_email", length = 255, nullable = false, unique = true)
     private String email;
 
-    //sessionList
-
-    public User() {}
-
-    public User(String name, String email) {
-        this.name = name;
-        this.email = email;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public long getId() {
-        return id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getname() {
+    public String getName() {
         return name;
     }
 
-    public void setname(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -43,17 +38,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
     }
 }

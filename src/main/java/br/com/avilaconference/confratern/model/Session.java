@@ -10,6 +10,7 @@ import java.util.List;
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "session_id")
     private Integer id;
     @Column(name = "session_title", length = 255, nullable = false)
     private String title;
@@ -19,7 +20,7 @@ public class Session {
     private LocalTime startTime;
 
     @ManyToOne
-    @JoinColumn(name = "conf_id")
+    @JoinColumn(name = "conference_id")
     private Conference conference;
 
     public Integer getId() {
